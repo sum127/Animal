@@ -1,170 +1,54 @@
+
 <template>
-  <div class="home">
-    <!-- 부트스트랩 -->
-
-    <div style="display: flex">
-      <div id="map" style="height: 100vh; width: 140vh"></div>
-      <div style="margin-left: 20px">
-        <!-- 부트스트랩 복붙 -->
-        <ul class="nav nav-tabs">
-          <li class="nav-item">
-            <!-- href는 보통 url 주소를 넣지만 자바스크립트도 넣을수있다 -->
-            <a
-              class="nav-link"
-              aria-current="page"
-              href="javascript:getData('PM10',0)"
-              >미세먼지</a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="javascript:getData('PM25',1)"
-              >초미세먼지</a
-            >
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
+  <v-container>
+    <v-col cols="9">
+      <v-card class="mapBox">
+        <v-card-text style="text-align: center"> 동물 병원 현황 </v-card-text>
+        <v-card id="map"> </v-card>
+      </v-card>
+    </v-col>
+  </v-container>
 </template>
-<script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDy8uS5Bk9_b2O3vO4FrCjEOIQAz8AhWzM&callback=initMap"
-      async
-    ></script>
-    
-<script>
-// @ is an alias to /src
 
+<style lang="scss">
+@import "../reset.css";
+
+#map {
+  margin: 0 auto;
+  width: 1500px;
+  height: 1000px;
+}
+.mapBox {
+  margin-top: 50px;
+}
+</style>
+
+<script>
 export default {
-  name: "Home",
-  data: () => ({
-    map: "",
-    axis: [],
-    markers: [],
-  }),
   mounted() {
-    this.getMap();
+    window.kakao && window.kakao.maps ? this.initMap() : this.addScript();
   },
   methods: {
-    getMap() {
-      this.map;
-
-      this.axis = {
-        //각 도시별 이름과 좌표값
-        busan: { name: "부산", lat: 35.18029, lng: 129.0741497 },
-        chungbuk: { name: "충북", lat: 36.6358136, lng: 127.4891505 },
-        chungnam: { name: "충남", lat: 36.6588327, lng: 126.6706716 },
-        daegu: { name: "대구", lat: 35.8819897, lng: 128.5836295 },
-        daejeon: { name: "대전", lat: 36.350461, lng: 127.3826354 },
-        gangwon: { name: "강원", lat: 37.8854026, lng: 127.7275925 },
-        gwangju: { name: "광주", lat: 35.160081, lng: 126.8492925 },
-        gyeongbuk: { name: "경부", lat: 36.576025, lng: 128.5034123 },
-        gyeonggi: { name: "경기", lat: 37.2750552, lng: 127.0072615 },
-        gyeongnam: { name: "경남", lat: 35.2367841, lng: 128.6892355 },
-        incheon: { name: "인천", lat: 37.4560939, lng: 126.7037324 },
-        jeju: { name: "제주", lat: 33.4827572, lng: 126.4799767 },
-        jeonbuk: { name: "전북", lat: 35.8161028, lng: 127.0808364 },
-        jeonnam: { name: "전남", lat: 34.8154627, lng: 126.4604013 },
-        sejong: { name: "세종", lat: 36.4801362, lng: 127.2865815 },
-        seoul: { name: "서울", lat: 37.5662994, lng: 126.9757618 },
-        ulsan: { name: "울산", lat: 35.5396267, lng: 129.3093443 },
-      };
-      this.markers = [];
-    },
     initMap() {
-      map = new google.maps.Map(document.getElementById("map"), {
-        // 구글맵에서 검색후 좌표입력
-        center: { lat: 36.5238016, lng: 127.790121 },
-        zoom: 8.2,
+      var container = document.getElementById("map");
+      var options = {
+        center: new kakao.maps.LatLng(37.5287006, 127.0068551),
+        level: 8,
+      };
+      var map = new kakao.maps.Map(container, options);
+      //마커추가하려면 객체를 아래와 같이 하나 만든다.
+      var marker = new kakao.maps.Marker({
+        position: map.getCenter(),
       });
-      getData("PM10");
+      marker.setMap(map);
     },
-    async getData(type, tabIndex = 0) {
-      const response = await fetch(
-        `http://localhost:6060/dust-hourly/${type}?size=25`
-      );
-      const data = await response.json();
-      console.log(data);
-      setTab(tabIndex);
-      setMarkers(type, data);
-    },
-    setTab(tabIndex) {
-      console.log(tabIndex);
-      const tabLinks = document.querySelectorAll(".nav-link");
-      console.log(tabLinks);
-
-      // 텝 active속성 초기화
-      for (let link of tabLinks) {
-        link.classList.remove("active");
-      }
-      // 클릭한 텝에 active추가
-      tabLinks[tabIndex].classList.add("active");
-    },
-    setMarkers(type, data) {
-      // 마커가 추가되면 초기화후에 추가
-      for (let marker of markers) {
-        marker.setMap(null);
-        marker = null;
-      }
-
-      for (let sido in axis) {
-        markers.push(
-          // 구글맵 플랫폼
-          new google.maps.Marker({
-            //(map : map)
-            // 마커가 올라가야하는 위치에 맵객체를 옵션으로 넣어줌
-            map,
-            position: {
-              // 마커가 표시되어야하는 좌표값
-              lat: axis[sido].lat,
-              lng: axis[sido].lng,
-            },
-            // 마커의 글자 속성값
-            label: {
-              text: data[0][sido].toString(),
-              color: "#ffffff",
-              fontSize: "14px",
-              fontWeight: "bold",
-            },
-            title: axis[sido].name,
-            // 마커의 이미지로 변경하는 속성
-            icon: {
-              url: getMarkerImage(type, data[0][sido]),
-              // url 이미지 크기
-              scaledSize: new google.maps.Size(50, 50),
-              // 이미지 시작 좌표
-              origin: new google.maps.Point(0, -10),
-            },
-          })
-        );
-      }
-    },
-    getMarkerImage(type, val) {
-      return `http://maps.google.com/mapfiles/ms/icons/${getColor(
-        type,
-        val
-      )}.png`;
-    },
-    // 마커 컬러 설정
-    // PM10, 60 => green
-    getColor(type, val) {
-      let color;
-
-      switch (type) {
-        case "PM10":
-          if (val <= 30) color = "blue";
-          else if (val > 30 && val <= 80) color = "green";
-          else if (val > 80 && val <= 150) color = "orange";
-          else color = "red";
-          break;
-        case "PM25":
-          if (val <= 30) color = "blue";
-          else if (val > 30 && val <= 80) color = "green";
-          else if (val > 80 && val <= 150) color = "orange";
-          else color = "red";
-          break;
-      }
-      console.log(color, "-----data");
-      return color;
+    addScript() {
+      const script = document.createElement("script");
+      /* global kakao */
+      script.onload = () => kakao.maps.load(this.initMap);
+      script.src =
+        "http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=3d963fed70cbcafd214b05e41b71d2b0";
+      document.head.appendChild(script);
     },
   },
 };

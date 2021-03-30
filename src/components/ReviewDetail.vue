@@ -6,12 +6,7 @@
       </div>
       <div class="picturePlace">
         <v-row style="width: 100%">
-          <v-col
-            v-for="(pic, i) in reviews.files"
-            :key="i"
-            cols="12"
-            sm="6"
-          >
+          <v-col v-for="(pic, i) in reviews.files" :key="i" cols="12" sm="6">
             <v-card class="mx-auto my-12" max-width="374">
               <v-img class="mainPic" :src="pic.dataUrl"></v-img>
             </v-card>
