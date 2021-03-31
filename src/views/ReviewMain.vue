@@ -70,6 +70,7 @@
 
 <script>
 import api from "../api/review";
+
 export default {
   data: () => ({
     // 전체내용을 한단위로 묶어서 배열로넣을곳
