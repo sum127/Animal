@@ -4,7 +4,11 @@
     <v-row>
       <v-col cols="7">
         <v-card class="mapBox">
-          <v-card-text style="text-align: center"> 동물 병원 현황 </v-card-text>
+          <v-text-field
+            label="병원이름을 입력하시오"
+            v-model="hospitalName"
+            @keyup.enter="initMap(hospitalName)"
+          ></v-text-field>
           <v-card id="map"> </v-card>
         </v-card>
       </v-col>
@@ -93,52 +97,54 @@ export default {
   data: () => ({
     newItems: [],
     positions: [],
+    x: 127.0068551,
+    y: 37.5287006,
+    level: 8,
+    hospitalName: "",
   }),
   mounted() {
     window.kakao && window.kakao.maps ? this.initMap() : this.addScript();
   },
   methods: {
-    async initMap() {
+    async initMap(name) {
       // 지도정보
       const result = await api.list();
       this.newItems = result.data;
-
       // 지도를 표시할 div
       var container = document.getElementById("map");
 
+      if (name) {
+        for (let a of result.data) {
+          if (a.bplcnm == this.hospitalName) {
+            this.x = a.afterX;
+            this.y = a.afterY;
+            this.level = 1;
+          }
+        }
+      }
+      console.log(this.x + " " + this.y);
+
       var options = {
         // 지도의 중심축
-        center: new kakao.maps.LatLng(37.5287006, 127.0068551),
+        center: new kakao.maps.LatLng(this.y, this.x),
         // 확대정도
-        level: 8,
+        level: this.level,
       };
       // 지도생성
       var map = new kakao.maps.Map(container, options);
+      if(name){
+      // 마커가 표시될 위치입니다
+      var markerPosition = new kakao.maps.LatLng(this.y, this.x);
 
-      for (let a of result.data) {
-        var markerPosition = {
-          title: a.bplcnm,
-          LatLng: new kakao.maps.LatLng(a.afterX, a.afterY),
-        };
+      // 마커를 생성합니다
+      var marker = new kakao.maps.Marker({
+        position: markerPosition,
+      });
 
-        var imageSrc =
-          "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
-        console.log(markerPosition.LatLng);
-        // 마커 이미지의 이미지 크기 입니다
-        var imageSize = new kakao.maps.Size(24, 35);
-
-        // 마커 이미지를 생성합니다
-        var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
-
-        // 마커를 생성합니다
-        var marker = new kakao.maps.Marker({
-          map: map, // 마커를 표시할 지도
-          title: markerPosition.title,
-          position: markerPosition.LatLng, // 마커를 표시할 위치
-          image: markerImage, // 마커 이미지
-        });
-        console.log(marker);
+      // 마커가 지도 위에 표시되도록 설정합니다
+      marker.setMap(map);
       }
+      console.log(map);
     },
     addScript() {
       const script = document.createElement("script");

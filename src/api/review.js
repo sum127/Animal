@@ -20,6 +20,14 @@ export default {
                 'content-type': 'multipart/form-data'
             }
         }),
+
+        patchFile: (textId, form) =>
+        axios.put(`${process.env.VUE_APP_API_BASE_URL}/reviews/${textId}/pictures`,
+            form, {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        }),
     
     // 전체목록조회
     list: () =>
@@ -29,7 +37,9 @@ export default {
     search: (id) =>
         axios.get(`${process.env.VUE_APP_API_BASE_URL}/reviews/${id}`),
     
-    
+    // 내용 수정
+    patch: (id, contents) =>
+        axios.patch(`${process.env.VUE_APP_API_BASE_URL}/reviews/${id}`, contents),
     // 닉네임 중복체크
     check: (nickname) =>
         axios.get(`${process.env.VUE_APP_API_BASE_URL}/reviews/nickname/check?keyword=${nickname}`),

@@ -22,10 +22,17 @@ const routes = [
     name: 'writeform',
     component: () => import('../components/WriteForm.vue')
   },
+  // 수정전
   {
-    path: '/test',
+    path: '/test/:id',
     name: 'test',
     component: () => import('@/views/Test.vue')
+  },
+  // 수정페이지지
+  {
+    path: '/patch/:id',
+    name: 'patch',
+    component: () => import('@/views/Patch.vue')
   },
   // 삭제전 본인인증
   {

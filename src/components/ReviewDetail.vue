@@ -129,7 +129,8 @@ export default {
       this.$router.push(`/beforedelete/${id}/${nickname}`);
     },
     moveToBeforePatch() {
-      this.$router.push("/test");
+       const id = this.reviews.id;
+      this.$router.push(`/test/${id}`);
     },
   },
 };
