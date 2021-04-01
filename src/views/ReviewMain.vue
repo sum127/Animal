@@ -99,6 +99,8 @@ export default {
     async getReviews() {
       // api에 list호출
       const result = await api.list();
+
+      console.log(result.data + "참고");
       // 상태가 정상이면
       if (result.status == 200) {
         // reviews에 정보저장

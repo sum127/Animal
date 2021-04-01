@@ -128,6 +128,9 @@ export default {
       // 삭제전 인증페이지 이동(매개변수로 id, nickname)   (router.index참고)
       this.$router.push(`/beforedelete/${id}/${nickname}`);
     },
+    moveToBeforePatch() {
+      this.$router.push("/test");
+    },
   },
 };
 </script>

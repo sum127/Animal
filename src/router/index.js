@@ -22,6 +22,11 @@ const routes = [
     name: 'writeform',
     component: () => import('../components/WriteForm.vue')
   },
+  {
+    path: '/test',
+    name: 'test',
+    component: () => import('@/views/Test.vue')
+  },
   // 삭제전 본인인증
   {
     path: '/beforedelete/:id/:nickname',
