@@ -22,11 +22,13 @@
               v-if="review.files.length > 0"
               class="mainPic"
               :src="review.files[0].dataUrl"
+              alt="review.files[0].dataUrl"
             ></v-img>
             <v-img
               v-if="review.files.length == 0"
               class="mainPic"
               src="https://3.bp.blogspot.com/-ZKBbW7TmQD4/U6P_DTbE2MI/AAAAAAAADjg/wdhBRyLv5e8/s1600/noimg.gif"
+              alt="이미지없음"
             ></v-img>
           </div>
           <div>
@@ -96,15 +98,12 @@ export default {
     // 상세 페이지로 이동 (해당정보를 매개변수로 가져옴)
     moveToDetail(review) {
       const nickname = review.nickname;
-      // 해당정보의 닉네임을 매개변수로넘김
       this.$router.push("/reviewdetail/" + nickname);
     },
     // 목록조회 함수
     async getReviews() {
-      // 매개변수로 받은 제목을 title에 저장
       const title = this.$route.params.title;
       console.log(title, "매개변수 콘솔 출력");
-      // 제목으로 조회하는 title api호출
       const result = await api.title(title);
       console.log(await api.title(title), "api호출주소 출력");
 
@@ -114,7 +113,6 @@ export default {
       console.log(result.data);
       // 정상적으로 조회되면
       if (result.status == 200) {
-        // 데이터를 reviews에 대입
         this.reviews = result.data;
       }
     },
@@ -125,7 +123,6 @@ export default {
 
       // 정상적으로 조회되면
       if (result.status == 200) {
-        // 데이터를 reviews에 대입
         this.reviews = result.data;
       }
     },

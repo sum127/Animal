@@ -3,8 +3,8 @@
 <template>
   <div>
     <v-container class="toPatchContainer">
-      <div>
-        <h1 class="title">님의 게시글</h1>
+      <v-card>
+        <h1 class="title">삭제페이지</h1>
         <v-text-field
           label="닉네임을 입력하세요"
           v-model="nickname"
@@ -19,11 +19,11 @@
           dense
         >
         </v-text-field>
-      </div>
-      <div style="text-align: center">
-        <v-btn small color="primary" @click="moveToMain()">목록</v-btn>
-        <v-btn small color="primary" @click="del">삭제</v-btn>
-      </div>
+        <div style="text-align: center">
+          <v-btn small color="primary" @click="moveToMain()">목록</v-btn>
+          <v-btn small color="primary" @click="del">삭제</v-btn>
+        </div>
+      </v-card>
     </v-container>
   </div>
 </template>
@@ -34,13 +34,12 @@
   margin-top: 10px;
   background-color: pink;
 }
-.field {
-  width: 300px;
-  margin: 0 auto;
+.divider {
+  margin-bottom: 20px;
 }
 .title {
-  font-size: 310px;
   text-align: center;
+  margin-bottom: 10px;
 }
 </style>
 
@@ -53,7 +52,7 @@ export default {
     password: "",
     data: [],
   }),
-  
+
   methods: {
     // 메인 페이지로이동
     moveToMain() {
@@ -61,11 +60,9 @@ export default {
     },
     // 삭제전에 개인정보체크 함수
     async del() {
-      // 매개변수로 받은 id 저장
       const id = this.$route.params.id;
       // id 해당 정보조회
       const information = await api.search(id);
-      // 조회결과 data변수에 저장
       const data = information.data;
       this.data = data;
       console.log("조회결과 조회");
@@ -81,9 +78,12 @@ export default {
       if (this.password && this.nickname) {
         const tf = await api.pwCheck(nickname, password);
         if (tf.data == true) {
-          const result = await api.del(id);
-          console.log(result);
-          this.$router.push("/reviewmain");
+          const a = confirm("정말 삭제하시겠습니까?");
+          if (a == true) {
+            const result = await api.del(id);
+            console.log(result);
+            this.$router.push("/reviewmain");
+          }
         } else {
           alert("닉네임이나 비밀번호가 틀립니다.");
         }

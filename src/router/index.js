@@ -20,7 +20,7 @@ const routes = [
   {
     path: '/writeform',
     name: 'writeform',
-    component: () => import('../components/WriteForm.vue')
+    component: () => import('../views/WriteForm.vue')
   },
   // 수정전
   {
@@ -38,19 +38,19 @@ const routes = [
   {
     path: '/beforedelete/:id/:nickname',
     name: 'beforedelete',
-    component: () => import('../components/BeforeDelete.vue')
+    component: () => import('../views/BeforeDelete.vue')
   },
   // 상세화면 조회
   {
     path: '/reviewdetail/:id',
     name: 'reviewdetail',
-    component: () => import('../components/ReviewDetail.vue')
+    component: () => import('../views/ReviewDetail.vue')
   },
   // 닉네임 입력으로 조회
   {
     path: '/findbytitle/:title',
     name: 'findbytitle',
-    component: () => import('../components/FindByTitle.vue')
+    component: () => import('../views/FindByTitle.vue')
   }
 
 ]

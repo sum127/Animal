@@ -53,7 +53,7 @@ export default {
     password: "",
     data: [],
   }),
-  
+
   methods: {
     // 메인 페이지로이동
     moveToMain() {

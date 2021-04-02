@@ -1,59 +1,62 @@
 <template>
   <div>
-    <v-container class="writeContainer">
+    <v-container style="outContainer">
       <v-row>
         <v-col>
-          <div class="field">
-            <v-text-field
-              label="제목을 입력하세요"
-              v-model="title"
-              outlined
-              dense
-            ></v-text-field>
-            <v-text-field
-              label="닉네임을 입력하세요"
-              v-model="nickname"
-              outlined
-              dense
-            ></v-text-field>
-            <v-btn @click="check">중복체크</v-btn>
-            <v-text-field
-              label="비밀번호를 입력하세요"
-              v-model="password"
-              outlined
-              dense
-            ></v-text-field>
-          </div>
+          <v-card class="writeContainer">
+            <div>
+              <v-text-field
+                label="제목을 입력하세요"
+                v-model="title"
+                outlined
+                dense
+              ></v-text-field>
+              <v-text-field
+                label="닉네임을 입력하세요"
+                v-model="nickname"
+                outlined
+                dense
+              ></v-text-field>
+              <v-btn @click="check" style="width: 100%">중복체크</v-btn>
+              <v-text-field
+                label="비밀번호를 입력하세요"
+                v-model="password"
+                style="margin-top: 30px"
+                outlined
+                dense
+              ></v-text-field>
+            </div>
 
-          <div style="text-align: center">
-            <textarea
-              cols="100"
-              rows="20"
-              style="border: 1px solid black"
-              v-model="post"
-            ></textarea>
-          </div>
-          <div class="field">
-            <v-file-input
-              v-model="files"
-              prepend-icon="mdi-camera"
-              label="pick photos or videos"
-              accept="image/png, image/jpeg, image/bmp, video/mp4"
-              multiple
-            >
-            </v-file-input>
-          </div>
+            <div style="text-align: center">
+              <textarea
+                cols="100"
+                rows="20"
+                style="border: 1px solid black"
+                v-model="post"
+              ></textarea>
+            </div>
+            <div class="field">
+              <v-file-input
+                v-model="files"
+                prepend-icon="mdi-camera"
+                label="pick photos or videos"
+                accept="image/png, image/jpeg, image/bmp, video/mp4"
+                multiple
+              >
+              </v-file-input>
+            </div>
 
-          <div style="text-align: center">
-            <v-btn small color="primary" @click="moveToMain()">목록</v-btn>
-            <v-btn
-              small
-              color="primary"
-              @click="share()"
-              style="text-align: center"
-              >저장</v-btn
-            >
-          </div>
+            <div style="text-align: center">
+              <v-btn small color="primary" @click="moveToMain()">목록</v-btn>
+              <v-btn
+                small
+                color="primary"
+                @click="share()"
+                style="text-align: center"
+                >저장</v-btn
+              >
+            </div>
+          </v-card>
         </v-col>
       </v-row>
     </v-container>
@@ -61,9 +64,12 @@
 </template>
 
 <style lang="scss">
+.outContainer {
+  width: 100%;
+}
 .writeContainer {
   width: 1000px;
-  margin-top: 10px;
+  margin: 0 auto;
   background-color: pink;
 }
 .field {
@@ -81,7 +87,7 @@ export default {
     title: "",
     // v-model : 닉네임
     nickname: "",
-    patchCheckName : "",
+    patchCheckName: "",
     // v-model : 비번
     password: "",
     // post의 내용 1건 담을곳
@@ -99,10 +105,10 @@ export default {
   methods: {
     async share() {
       // 제목, 닉네임, 비번이 입력되어있어야함
-      if (this.title && this.nickname && this.password ) {
+      if (this.title && this.nickname && this.password) {
         // checkname 이 중복이 아니어야함
         if (this.checkname == false && this.patchCheckName == this.nickname) {
-          // 입력한 사항들을 review라는 면수에 객체화해서 담음
+          // 입력한 사항들을 review라는 변수에 객체화해서 담음
           const review = {
             title: this.title,
             nickname: this.nickname,
@@ -110,60 +116,43 @@ export default {
             content: this.post,
           };
 
-          // 정보 객체화한거 콘솔출력
           console.log("정보 객체화한거 출력");
           console.log(review);
 
-          // 객체화한 정보를 매개변수로 api post호출
-
-          //api호출한 결과 result에 대입
           const result = await api.post(review);
 
-          //호출결과 콘솔출력
           console.log("호출결과 콘솔출력");
           console.log(result);
 
-          //호출결과상태 콘솔출력
           console.log("호출결과 상태값 콘솔출력");
           console.log(result.status);
 
-          //호출결과의 데이터 콘솔출력 ex)title
           console.log("호출결과의 데이터 콘솔출력");
           console.log(result.data);
 
-          //호출이 정상적으로 이루어지면
           if (result.status == 200) {
-            //호출한 데이터를 newReview 변수에 대입
             const newReview = result.data;
-            // 호출한데이터의 files부분을 배열로 만들어준다.  (백엔드)
             newReview.files = [];
 
             // 넣을 파일이 존재하고, 1개이상이면 (프론트엔드)
             if (this.files && this.files.length > 0) {
               // 파일의 갯수만큼 반복 (변수병은 file로 사용)
               for (let file of this.files) {
-                // 폼데이터를 생성하여 form 변수에 대입
                 const form = new FormData();
-                // 폼데이터에 data, 파일  형식으로 추가
                 form.append("data", file);
-                // uploadfile api호출 (매개변수로 id랑 폼데이터를 넣어줌)
                 const result = await api.uploadFile(newReview.id, form);
-                // api 호출 결과상테 콘솔출력
                 console.log("업로드한 파일결과 상태출력");
                 console.log(result.status);
                 console.log("업로드한 파일 결과 데이터 출력");
                 console.log(result.data);
 
-                // 138번에서말하는 newReview.files에 업로드한 파일데이터를 복사하여 푸쉬
                 newReview.files.push({
                   ...result.data,
                 });
               }
             }
 
-            // 93번 라인 reviews에 데이터 추가
             this.reviews.unshift(newReview);
-            // 메인 페이지로 이동
             this.$router.push("/reviewmain");
           }
           //checkname 이 중복이면 alert띄움
@@ -176,13 +165,10 @@ export default {
       }
     },
     async check() {
-      // 입력한 nickname을 review 변수에 저장
       const review = this.nickname;
-      // 입력한 닉네임 잘넣었나 확인
       console.log("입력한 닉네임 잘넣었나 확인");
       console.log(review);
 
-      // api check호출하여 result에 대입
       const result = await api.check(review);
 
       //중복 이면 트루 중복아니면 false
