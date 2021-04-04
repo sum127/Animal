@@ -10,6 +10,11 @@ const routes = [
     name: 'home',
     component: Home
   },
+  {
+    path: '/hospital',
+    name: 'hospital',
+    component: () => import('../views/Hospital.vue')
+  },
   // 메인화면
   {
     path: '/reviewmain',
@@ -24,9 +29,9 @@ const routes = [
   },
   // 수정전
   {
-    path: '/test/:id',
-    name: 'test',
-    component: () => import('@/views/Test.vue')
+    path: '/beforepatch/:id',
+    name: 'beforepatch',
+    component: () => import('@/views/BeforePatch.vue')
   },
   // 수정페이지지
   {

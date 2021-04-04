@@ -13,8 +13,8 @@ export default {
             review),
 
     // 파일업로드
-    uploadFile: (textId, form) =>
-        axios.post(`${process.env.VUE_APP_API_BASE_URL}/reviews/${textId}/review-picture-file`,
+    uploadFile: (id, form) =>
+        axios.post(`${process.env.VUE_APP_API_BASE_URL}/reviews/${id}/review-picture-file`,
             form, {
             headers: {
                 'content-type': 'multipart/form-data'
@@ -32,28 +32,36 @@ export default {
     // 전체목록조회
     list: () =>
         axios.get(`${process.env.VUE_APP_API_BASE_URL}/reviews`),
-
     // id로 조회
     search: (id) =>
         axios.get(`${process.env.VUE_APP_API_BASE_URL}/reviews/${id}`),
+    // 제목으로 조회
+    title: (title) =>
+        axios.get(`${process.env.VUE_APP_API_BASE_URL}/reviews/search/title?keyword=${title}`),
     
-    // 내용 수정
-    patch: (id, contents) =>
-        axios.patch(`${process.env.VUE_APP_API_BASE_URL}/reviews/${id}`, contents),
+    
     // 닉네임 중복체크
     check: (nickname) =>
         axios.get(`${process.env.VUE_APP_API_BASE_URL}/reviews/nickname/check?keyword=${nickname}`),
-
     //아이디 비번체크
     pwCheck: (nickname, password) =>
         axios.get(`${process.env.VUE_APP_API_BASE_URL}/reviews/${nickname}/check?keyword=${password}`),
     
-    title: (title) =>
-        axios.get(`${process.env.VUE_APP_API_BASE_URL}/reviews/search/title?keyword=${title}`),
-
+    
+    // id로 삭제
     del: (id) =>
-        axios.delete(`${process.env.VUE_APP_API_BASE_URL}/reviews/${id}`)
+        axios.delete(`${process.env.VUE_APP_API_BASE_URL}/reviews/${id}`),
 
 
+    patchContent: (id, content) =>
+        axios.patch(`${process.env.VUE_APP_API_BASE_URL}/reviews/${id}?content=${content}`),
+
+    patchPic: (id, form) =>
+        axios.patch(`${process.env.VUE_APP_API_BASE_URL}/reviews/${id}/pictures`,
+        form, {
+        headers: {
+            'content-type': 'multipart/form-data'
+        }
+    }),
 
 }

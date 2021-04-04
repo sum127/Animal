@@ -113,7 +113,7 @@ export default {
     },
     moveToBeforePatch() {
       const id = this.reviews.id;
-      this.$router.push(`/test/${id}`);
+      this.$router.push(`/beforepatch/${id}`);
     },
   },
 };

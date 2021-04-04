@@ -15,7 +15,7 @@
           v-for="(item, i) in items"
           :key="i"
           @click="navigateTo(item)"
-          width="20%"
+          width="16.6%"
           height="70px"
         >
           <h2 v-text="item.text"></h2>
@@ -56,6 +56,7 @@ export default {
       { text: "유기동물", icon: "mdi-home", path: "/" },
       { text: "분실/보호동물", icon: "mdi-contacts", path: "/" },
       { text: "입양후기", icon: "mdi-forum", path: "/reviewmain" },
+      { text: "동물병원", path: "hospital"},
       { text: "신청내역조회", icon: "mdi-format-list-checks", path: "/" },
       { text: "관리자", icon: "mdi-format-list-checks", path: "/" },
     ],
