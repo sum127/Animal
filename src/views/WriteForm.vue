@@ -21,6 +21,7 @@
               <v-text-field
                 label="비밀번호를 입력하세요"
                 v-model="password"
+                type="password"
                 style="margin-top: 30px"
                 outlined
                 dense

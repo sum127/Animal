@@ -86,7 +86,7 @@ export default {
   methods: {
     // (글쓰기) 클릭시
     moveToWriteForm() {
-      this.$router.push("/writeform");
+      this.$router.push("/selectpic");
     },
     // 입력한 정보나사진 클릭시
     moveToDetail(review) {

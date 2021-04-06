@@ -102,6 +102,7 @@ export default {
           form.append("data", file);
           const fileResult = await api.patchPic(id, form);
           if (result.status == 200) {
+            console.log("hi");
             console.log(fileResult);
           }
         }
