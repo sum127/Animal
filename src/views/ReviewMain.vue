@@ -18,6 +18,7 @@
           max-width="374"
         >
           <div class="pictureOutBox">
+            
             <v-img
               v-if="review.files.length > 0"
               class="mainPic"
@@ -30,6 +31,12 @@
               src="https://3.bp.blogspot.com/-ZKBbW7TmQD4/U6P_DTbE2MI/AAAAAAAADjg/wdhBRyLv5e8/s1600/noimg.gif"
               alt="이미지없음"
             ></v-img>
+            <v-img
+            src="https://yt3.ggpht.com/a/AGF-l7_ZMppFvkHME6wrGHni5X-qQn445JTnyUkX8A=s900-mo-c-c0xffffffff-rj-k-no"
+            
+            class="show"
+            >
+            </v-img>
           </div>
           <div>
             <v-card-title>제목 : {{ review.title }}</v-card-title>
@@ -59,10 +66,15 @@
   width: 100%;
   text-align: center;
 }
+
 .pictureOutBox {
   width: 375px;
   height: 200px;
   overflow: hidden;
+}
+.mainPic:hover{
+  display: none;
+  
 }
 .mainPic {
   width: 100%;
@@ -100,6 +112,7 @@ export default {
       console.log(result.data + "참고");
       if (result.status == 200) {
         this.reviews = result.data;
+        
       }
     },
     // 제목으로 특정하여 조회함수
