@@ -95,12 +95,14 @@ export default {
         console.log("수정성공");
       }
 
+      await api.delpic(id);
+
       // 지금은 사진 3개넣어도 1개로만 수정됨 이유는 스프링참고
       if (this.files && this.files.length > 0) {
         for (let file of this.files) {
           const form = new FormData();
           form.append("data", file);
-          const fileResult = await api.patchPic(id, form);
+          const fileResult = await api.uploadFile(id, form);
           if (result.status == 200) {
             console.log("hi");
             console.log(fileResult);

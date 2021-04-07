@@ -21,14 +21,18 @@ export default {
             }
         }),
 
-        patchFile: (textId, form) =>
+    patchFile: (textId, form) =>
         axios.put(`${process.env.VUE_APP_API_BASE_URL}/reviews/${textId}/pictures`,
             form, {
             headers: {
                 'content-type': 'multipart/form-data'
             }
         }),
-    
+    // 파일삭제
+
+    delpic: (id) =>
+        axios.delete(`${process.env.VUE_APP_API_BASE_URL}/reviews/${id}/review-picture-file`),
+
     // 전체목록조회
     list: () =>
         axios.get(`${process.env.VUE_APP_API_BASE_URL}/reviews`),
@@ -38,16 +42,16 @@ export default {
     // 제목으로 조회
     title: (title) =>
         axios.get(`${process.env.VUE_APP_API_BASE_URL}/reviews/search/title?keyword=${title}`),
-    
-    
+
+
     // 닉네임 중복체크
     check: (nickname) =>
         axios.get(`${process.env.VUE_APP_API_BASE_URL}/reviews/nickname/check?keyword=${nickname}`),
     //아이디 비번체크
     pwCheck: (nickname, password) =>
         axios.get(`${process.env.VUE_APP_API_BASE_URL}/reviews/${nickname}/check?keyword=${password}`),
-    
-    
+
+
     // id로 삭제
     del: (id) =>
         axios.delete(`${process.env.VUE_APP_API_BASE_URL}/reviews/${id}`),
@@ -58,10 +62,10 @@ export default {
 
     patchPic: (id, form) =>
         axios.patch(`${process.env.VUE_APP_API_BASE_URL}/reviews/${id}/pictures`,
-        form, {
-        headers: {
-            'content-type': 'multipart/form-data'
-        }
-    }),
+            form, {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        }),
 
 }
