@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="writeBox">
-      <v-btn style="margin-top: 20px" @click="moveToWriteForm">글쓰기</v-btn>
+      <v-btn style="margin: 30px 0px 50px 0px" @click="moveToWriteForm"
+        >글쓰기</v-btn
+      >
     </div>
     <v-row no-gutters>
       <v-col
@@ -12,11 +14,7 @@
         cols="12"
         sm="4"
       >
-        <v-card
-          @click="moveToDetail(review)"
-          class="mx-auto my-12"
-          max-width="374"
-        >
+        <v-card @click="moveToDetail(review)" class="cardBox">
           <div class="pictureOutBox">
             <v-img
               v-if="review.files.length > 0"
@@ -31,7 +29,7 @@
               alt="이미지없음"
             ></v-img>
           </div>
-          <div>
+          <div class="pictureOutBox">
             <v-card-title>제목 : {{ review.title }}</v-card-title>
             <v-divider class="mx-4"></v-divider>
             <v-card-title>닉네임 : {{ review.nickname }}</v-card-title>
@@ -41,6 +39,7 @@
     </v-row>
     <v-container style="width: 300px">
       <v-text-field
+        style="margin-top: 50px"
         outlined
         label="제목을 입력하시오"
         append-icon="mdi-magnify"
@@ -68,6 +67,11 @@
   width: 100%;
   height: 100%;
 }
+.cardBox {
+  width: 375px;
+  min-width: 375px;
+  margin: 0 auto;
+}
 </style>
 
 <script>
@@ -79,9 +83,10 @@ export default {
     reviews: [],
     // 입력하여 검색할 값을 저장할곳
     value: "",
+    view: true,
   }),
   mounted() {
-    this.getReviews();
+    this.getReviews(this.view);
   },
   methods: {
     // (글쓰기) 클릭시
@@ -94,17 +99,28 @@ export default {
       this.$router.push("/reviewdetail/" + id);
     },
     // 목록조회함수
-    async getReviews() {
-      const result = await api.list();
+    async getReviews(view) {
+      if (view == true) {
+        const result = await api.list();
 
-      console.log(result.data + "참고");
-      if (result.status == 200) {
-        this.reviews = result.data;
+        console.log(result.data + "참고");
+        if (result.status == 200) {
+          this.reviews = result.data;
+        }
       }
     },
     // 제목으로 특정하여 조회함수
-    movoToSearch() {
-      this.$router.push("/findbytitle/" + this.value);
+    async movoToSearch() {
+      this.view = false;
+      if (this.view == false) {
+        const title = this.value;
+        const result = await api.title(title);
+
+        // 정상적으로 조회되면
+        if (result.status == 200) {
+          this.reviews = result.data;
+        }
+      }
     },
   },
 };

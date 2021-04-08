@@ -17,12 +17,6 @@ const routes = [
     name: 'beforepatch',
     component: () => import('@/views/BeforePatch.vue')
   },
-  // 닉네임 입력으로 조회
-  {
-    path: '/findbytitle/:title',
-    name: 'findbytitle',
-    component: () => import('../views/FindByTitle.vue')
-  },
   {
     path: '/',
     name: 'home',

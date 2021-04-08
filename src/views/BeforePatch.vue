@@ -1,13 +1,12 @@
-
-
 <template>
   <div>
     <v-container class="toPatchContainer">
-      <div>
-        <h1 class="title">님의 게시글</h1>
+      <v-card>
+        <h1 class="title">수정페이지</h1>
         <v-text-field
           label="닉네임을 입력하세요"
           v-model="nickname"
+          @keyup.enter="patch"
           outlined
           dense
         >
@@ -16,15 +15,16 @@
           label="비밀번호를 입력하세요"
           v-model="password"
           type="password"
+          @keyup.enter="patch"
           outlined
           dense
         >
         </v-text-field>
-      </div>
-      <div style="text-align: center">
-        <v-btn small color="primary" @click="moveToMain()">목록</v-btn>
-        <v-btn small color="primary" @click="patch">수정</v-btn>
-      </div>
+        <div style="text-align: center">
+          <v-btn small color="primary" @click="moveToMain()">목록</v-btn>
+          <v-btn small color="primary" @click="patch">수정</v-btn>
+        </div>
+      </v-card>
     </v-container>
   </div>
 </template>
@@ -32,18 +32,17 @@
 <style lang="scss">
 .toPatchContainer {
   width: 1000px;
-  margin-top: 10px;
-  background-color: pink;
+  margin-top: 30px;
 }
-.field {
-  width: 300px;
-  margin: 0 auto;
+.divider {
+  margin-bottom: 20px;
 }
 .title {
-  font-size: 310px;
   text-align: center;
+  margin-bottom: 10px;
 }
 </style>
+
 
 <script>
 import api from "../api/review";

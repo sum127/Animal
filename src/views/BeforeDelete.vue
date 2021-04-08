@@ -1,5 +1,3 @@
-
-
 <template>
   <div>
     <v-container class="toPatchContainer">
@@ -8,6 +6,7 @@
         <v-text-field
           label="닉네임을 입력하세요"
           v-model="nickname"
+          @keyup.enter="del"
           outlined
           dense
         >
@@ -16,6 +15,7 @@
           label="비밀번호를 입력하세요"
           v-model="password"
           type="password"
+          @keyup.enter="del"
           outlined
           dense
         >
@@ -32,8 +32,7 @@
 <style lang="scss">
 .toPatchContainer {
   width: 1000px;
-  margin-top: 10px;
-  background-color: pink;
+  margin-top: 30px;
 }
 .divider {
   margin-bottom: 20px;

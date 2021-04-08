@@ -16,8 +16,8 @@
         >
         </v-text-field>
         <div style="display: flex">
+          <v-btn @click="main">목록</v-btn>
           <v-btn style="margin-bottom: 100px" @click="searchAll">체크</v-btn>
-          <v-btn>사진을 누르시오</v-btn>
         </div>
       </div>
       <v-card v-for="(review, i) in getdata" :key="i">
@@ -97,6 +97,9 @@ export default {
       } else {
         alert("입양한 내역이없습니다.");
       }
+    },
+    main() {
+      this.$router.push("/reviewmain");
     },
   },
 };
