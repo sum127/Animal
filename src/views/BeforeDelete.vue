@@ -34,9 +34,6 @@
   width: 1000px;
   margin-top: 30px;
 }
-.divider {
-  margin-bottom: 20px;
-}
 .title {
   text-align: center;
   margin-bottom: 10px;
@@ -67,9 +64,6 @@ export default {
       this.data = data;
       console.log("조회결과 조회");
       console.log(information.data);
-
-      console.log(data.nickname, "원래닉네임");
-      console.log(data.password, "원래비번");
 
       const nickname = this.nickname;
       const password = this.password;

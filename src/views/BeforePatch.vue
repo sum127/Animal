@@ -34,9 +34,6 @@
   width: 1000px;
   margin-top: 30px;
 }
-.divider {
-  margin-bottom: 20px;
-}
 .title {
   text-align: center;
   margin-bottom: 10px;

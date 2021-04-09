@@ -36,7 +36,7 @@
   </v-container>
 </template>
 
-<style lang="scss">
+  <style lang="scss">
 @import "../reset.css";
 
 table {
@@ -82,7 +82,14 @@ table tbody td {
 .mapBox {
   margin-top: 50px;
 }
-
+.name {
+  text-align: center;
+  width: 30%;
+}
+.address {
+  width: 70%;
+  text-align: center;
+}
 .tableName {
   width: 30%;
   text-align: center;
@@ -90,14 +97,6 @@ table tbody td {
 .tableName:hover {
   background-color: gray;
   color: white;
-}
-.address {
-  width: 70%;
-  text-align: center;
-}
-.name {
-  text-align: center;
-  width: 30%;
 }
 .tableAddress {
   text-align: center;

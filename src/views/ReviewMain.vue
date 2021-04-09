@@ -7,6 +7,7 @@
     </div>
     <v-row no-gutters>
       <v-col
+        class="box"
         v-for="(review, i) in reviews"
         :key="i"
         :review="review"
@@ -72,6 +73,9 @@
   min-width: 375px;
   margin: 0 auto;
 }
+.box {
+  margin-bottom: 120px;
+}
 </style>
 
 <script>
@@ -81,8 +85,9 @@ export default {
   data: () => ({
     // 전체내용을 한단위로 묶어서 배열로넣을곳
     reviews: [],
-    // 입력하여 검색할 값을 저장할곳
+    // 입력하여 검색할 인풋값을 저장할곳
     value: "",
+    // true 면 전체보기, false면 검색한것만보기
     view: true,
   }),
   mounted() {

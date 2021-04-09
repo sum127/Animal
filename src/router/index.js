@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 //import ReviewMain from '../views/ReviewMain.vue'
 Vue.use(VueRouter)
 
@@ -18,14 +17,9 @@ const routes = [
     component: () => import('@/views/BeforePatch.vue')
   },
   {
-    path: '/',
-    name: 'home',
-    component: Home
-  },
-  {
     path: '/hospital',
     name: 'hospital',
-    component: () => import('../views/Hospital.vue')
+    component: () => import('@/views/Hospital.vue')
   },
   // 수정페이지지
   {
