@@ -154,7 +154,7 @@ export default {
             }
 
             this.reviews.unshift(newReview);
-            this.$router.push("/reviewmain");
+            this.$router.push("/");
           }
           //checkname 이 중복이면 alert띄움
         } else {
@@ -187,7 +187,7 @@ export default {
     },
     // 메인 페이지로 이동
     moveToMain() {
-      this.$router.push("/reviewmain");
+      this.$router.push("/");
     },
   },
 };

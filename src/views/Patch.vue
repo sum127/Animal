@@ -111,14 +111,14 @@ export default {
       }
 
       // 메인 페이지로 이동
-      this.$router.push("/reviewmain");
+      this.$router.push("/");
 
       //checkname 이 중복이면 alert띄움
     },
 
     // 메인 페이지로 이동
     moveToMain() {
-      this.$router.push("/reviewmain");
+      this.$router.push("/");
     },
   },
 };

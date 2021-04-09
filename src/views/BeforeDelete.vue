@@ -53,7 +53,7 @@ export default {
   methods: {
     // 메인 페이지로이동
     moveToMain() {
-      this.$router.push("/reviewmain");
+      this.$router.push("/");
     },
     // 삭제전에 개인정보체크 함수
     async del() {
@@ -76,7 +76,7 @@ export default {
           if (a == true) {
             const result = await api.del(id);
             console.log(result);
-            this.$router.push("/reviewmain");
+            this.$router.push("/");
           }
         } else {
           alert("닉네임이나 비밀번호가 틀립니다.");

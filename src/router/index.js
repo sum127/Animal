@@ -34,10 +34,21 @@ const routes = [
     component: () => import('../views/ReviewDetail.vue')
   },
   // 메인화면
+  // {
+  //   path: '/',
+  //   name: 'reviewdetail',
+  //   component: () => import('../views/ReviewDetail.vue')
+  // },
   {
-    path: '/reviewmain',
+    path: '/',
     name: 'reviewmain',
     component: () => import('../views/ReviewMain.vue')
+  },
+
+  {
+    path: '/hospital',
+    name: 'hospital',
+    component: () => import('../views/Hospital.vue')
   },
   {
     path: '/selectpic',

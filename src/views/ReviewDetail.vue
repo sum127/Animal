@@ -88,7 +88,7 @@ export default {
   methods: {
     // 메인페이지이동
     moveToMain() {
-      this.$router.push("/reviewmain");
+      this.$router.push("/");
     },
     // 목록 조회 함수
     async getReviews() {

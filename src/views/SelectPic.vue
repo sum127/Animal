@@ -76,7 +76,7 @@ export default {
     },
     // 메인페이지 이동
     moveToMain() {
-      this.$router.push("/reviewmain");
+      this.$router.push("/");
     },
     async searchAll() {
       if (this.name && this.mobile) {
@@ -99,7 +99,7 @@ export default {
       }
     },
     main() {
-      this.$router.push("/reviewmain");
+      this.$router.push("/");
     },
   },
 };

@@ -9,7 +9,7 @@ module.exports = {
       awsProfile: 'default',
       overrideEndpoint: false,
       region: 'ap-northeast-2',
-      bucket: 'animal-review',
+      bucket: 'animal-teamproject',
       createBucket: false,
       staticHosting: true,
       staticIndexPage: 'index.html',
