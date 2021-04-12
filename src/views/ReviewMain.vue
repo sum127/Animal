@@ -16,25 +16,27 @@
         sm="4"
       >
         <v-card @click="moveToDetail(review)" class="cardBox">
-          <div class="pictureOutBox">
+          
             <v-img
               v-if="review.files.length > 0"
               class="mainPic"
               :src="review.files[0].dataUrl"
               alt="review.files[0].dataUrl"
+              style="height : 330px"
             ></v-img>
             <v-img
               v-if="review.files.length == 0"
               class="mainPic"
               src="https://3.bp.blogspot.com/-ZKBbW7TmQD4/U6P_DTbE2MI/AAAAAAAADjg/wdhBRyLv5e8/s1600/noimg.gif"
               alt="이미지없음"
+              style="height : 330px"
             ></v-img>
-          </div>
-          <div class="pictureOutBox">
-            <v-card-title>제목 : {{ review.title }}</v-card-title>
+          
+          
+            <v-card-title style="line-height : 20px">제목 : {{ review.title }}</v-card-title>
             <v-divider class="mx-4"></v-divider>
-            <v-card-title>닉네임 : {{ review.nickname }}</v-card-title>
-          </div>
+            <v-card-title style="line-height : 30px">닉네임 : {{ review.nickname }}</v-card-title>
+          
         </v-card>
       </v-col>
     </v-row>
@@ -67,11 +69,13 @@
 .mainPic {
   width: 100%;
   height: 100%;
+  
 }
 .cardBox {
-  width: 375px;
-  min-width: 375px;
+  width: 70%;
+  max-width: 70%;
   margin: 0 auto;
+  height: 100%;
 }
 .box {
   margin-bottom: 120px;

@@ -23,7 +23,7 @@
           height="70px"
           text
         >
-          <h2 v-text="item.text"></h2>
+          <h2 v-text="item.text" style="font-size:1em"></h2>
         </v-btn>
       </v-row>
       <router-view></router-view>

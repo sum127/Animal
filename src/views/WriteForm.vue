@@ -9,12 +9,14 @@
                 label="제목을 입력하세요"
                 v-model="title"
                 outlined
+                maxlength="13"
                 dense
               ></v-text-field>
               <v-text-field
                 label="닉네임을 입력하세요"
                 v-model="nickname"
                 outlined
+                maxlength="13"
                 dense
               ></v-text-field>
               <v-btn @click="check" style="width: 100%">중복체크</v-btn>

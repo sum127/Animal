@@ -21,6 +21,7 @@ const routes = [
     name: 'hospital',
     component: () => import('@/views/Hospital.vue')
   },
+  
   // 수정페이지지
   {
     path: '/patch/:id',

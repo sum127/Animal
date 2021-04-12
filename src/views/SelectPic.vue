@@ -17,11 +17,13 @@
         </v-text-field>
         <div style="display: flex">
           <v-btn @click="main">목록</v-btn>
-          <v-btn style="margin-bottom: 100px" @click="searchAll">체크</v-btn>
+          <v-btn style="margin-bottom: 120px" @click="searchAll">체크</v-btn>
         </div>
+        <h1 class="textz" v-if="check == true"> 후기 쓸 강아지 사진을 고르시오</h1>
       </div>
       <v-card v-for="(review, i) in getdata" :key="i">
         <img
+          v-if="i < 4"
           :src="review.animalImg"
           alt="유기견사진"
           class="pic"
@@ -41,7 +43,7 @@ ul {
 .getInfo {
   width: 800px;
   margin: 0 auto;
-  height: 400px;
+  height: 530px;
 }
 .textBox {
   width: 700px;
@@ -49,9 +51,18 @@ ul {
   text-align: right;
 }
 .pic {
-  width: 100%;
-  height: 100%;
+  float: left;
+  width: 200px;
+  height: 200px;
   cursor: pointer;
+}
+.pic:hover{
+  opacity: 50%;
+}
+.textz{
+  width: 100%;
+  font-size: 20px;
+  text-align: center;
 }
 </style>
 
