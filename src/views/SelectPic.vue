@@ -17,9 +17,11 @@
         </v-text-field>
         <div style="display: flex">
           <v-btn @click="main">목록</v-btn>
-          <v-btn style="margin-bottom: 120px" @click="searchAll">체크</v-btn>
+          <v-btn style="margin-bottom: 90px" @click="searchAll">체크</v-btn>
         </div>
-        <h1 class="textz" v-if="check == true"> 후기 쓸 강아지 사진을 고르시오</h1>
+        <h1 class="textz" v-if="check == true">
+          후기 쓸 강아지 사진을 고르시오
+        </h1>
       </div>
       <v-card v-for="(review, i) in getdata" :key="i">
         <img
@@ -56,10 +58,10 @@ ul {
   height: 200px;
   cursor: pointer;
 }
-.pic:hover{
+.pic:hover {
   opacity: 50%;
 }
-.textz{
+.textz {
   width: 100%;
   font-size: 20px;
   text-align: center;
