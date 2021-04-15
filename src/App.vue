@@ -23,7 +23,7 @@
           height="70px"
           text
         >
-          <h2 v-text="item.text" style="font-size:1em"></h2>
+          <h2 v-text="item.text" style="font-size: 1em"></h2>
         </v-btn>
       </v-row>
       <router-view></router-view>
@@ -58,7 +58,7 @@ export default {
       {
         text: "동물병원",
         src:
-          "http://animal-teamproject.s3-website.ap-northeast-2.amazonaws.com//#/hospital",
+          "http://animal-teamproject.s3-website.ap-northeast-2.amazonaws.com/#/hospital",
       },
     ],
   }),
