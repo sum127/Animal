@@ -8,7 +8,7 @@
         absolute
         right
         top
-        href="http://mongyang-manager.s3-website.ap-northeast-2.amazonaws.com/"
+        href="https://d3g8veh9tv5al6.cloudfront.net"
         ><v-icon>mdi-cog-outline</v-icon></v-btn
       >
     </div>
@@ -23,7 +23,7 @@
           height="70px"
           text
         >
-          <h2 v-text="item.text" style="font-size: 1em"></h2>
+          <h2 v-text="item.text"></h2>
         </v-btn>
       </v-row>
       <router-view></router-view>
@@ -46,14 +46,12 @@ export default {
       {
         text: "분실/보호동물",
         icon: "mdi-contacts",
-        src:
-          "http://mongyang-lostandfound.s3-website.ap-northeast-2.amazonaws.com/",
+        src: "https://d3morrlmvsmqh2.cloudfront.net/",
       },
       {
         text: "입양후기",
         icon: "mdi-forum",
-        src:
-          "http://animal-teamproject.s3-website.ap-northeast-2.amazonaws.com/",
+        src: "https://d3m5znvls41rz2.cloudfront.net/",
       },
       {
         text: "동물병원",
