@@ -51,12 +51,12 @@ export default {
       {
         text: "입양후기",
         icon: "mdi-forum",
-        src: "https://d3m5znvls41rz2.cloudfront.net/",
+        src: "http://new-animal.s3-website.ap-northeast-2.amazonaws.com",
       },
       {
         text: "동물병원",
         src:
-          "http://animal-teamproject.s3-website.ap-northeast-2.amazonaws.com/#/hospital",
+          "http://new-animal.s3-website.ap-northeast-2.amazonaws.com/#/hospital",
       },
     ],
   }),
